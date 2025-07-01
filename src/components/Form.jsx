@@ -89,19 +89,6 @@ export default function Form({ resumeData = {}, setResumeData, selectedTemplate,
           onChange={handleChange("portfolio")}
         />
       </div>
-
-      <div className="pt-4">
-        <label className="block text-sm font-semibold mb-1">Select Template</label>
-        <select
-          className="w-full p-2 border rounded"
-          value={selectedTemplate}
-          onChange={(e) => setSelectedTemplate(e.target.value)}
-        >
-          <option value="modern">Modern</option>
-          <option value="template1">Template One</option>
-          <option value="future">Future</option>
-        </select>
-      </div>
     </div>
   );
 }
