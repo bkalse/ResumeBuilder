@@ -1,63 +1,38 @@
 import { marked } from "marked";
-marked.setOptions({ breaks: true }); // Optional
 
 export default function ModernTemplate({ data }) {
   const md = (text) => ({ __html: marked.parse(text || "") });
 
   return (
-    <div className="p-8 max-w-3xl mx-auto bg-white text-gray-900 font-sans text-sm leading-relaxed text-justify">
+    <div className="w-full px-10 py-10 bg-white text-gray-900 font-sans text-[15px] leading-relaxed space-y-10">
       {/* Header */}
-      <div className="border-b pb-4 mb-6">
-        <h1 className="text-3xl font-bold tracking-wide">{data.name}</h1>
-        <p className="text-sm text-gray-600">
-          {data.email} | {data.phone}
+      <header className="space-y-1 border-b pb-4 border-gray-300">
+        <h1 className="text-3xl font-bold text-gray-800">{data.name}</h1>
+        <p className="text-sm text-gray-500">
+          {data.email} · {data.phone}
         </p>
-      </div>
+      </header>
 
       {/* Sections */}
-      <section className="mb-6">
-        <h2 className="text-lg font-semibold text-blue-700 mb-1">
-          Career Summary
-        </h2>
-        <div
-          className="prose prose-sm text-justify"
-          dangerouslySetInnerHTML={md(data.summary)}
-        />
-      </section>
-
-      <section className="mb-6">
-        <h2 className="text-lg font-semibold text-blue-700 mb-1">Skills</h2>
-        <div
-          className="prose prose-sm text-justify"
-          dangerouslySetInnerHTML={md(data.skills)}
-        />
-      </section>
-
-      <section className="mb-6">
-        <h2 className="text-lg font-semibold text-blue-700 mb-1">Experience</h2>
-        <div
-          className="w-full max-w-none prose prose-sm text-justify [&>*]:text-justify"
-          dangerouslySetInnerHTML={md(data.experience)}
-        />
-      </section>
-
-      <section className="mb-6">
-        <h2 className="text-lg font-semibold text-blue-700 mb-1">
-          Certifications
-        </h2>
-        <div
-          className="w-full max-w-none prose prose-sm text-justify [&>*]:text-justify"
-          dangerouslySetInnerHTML={md(data.certifications)}
-        />
-      </section>
-
-      <section>
-        <h2 className="text-lg font-semibold text-blue-700 mb-1">Portfolio</h2>
-        <div
-          className="w-full max-w-none prose prose-sm text-justify [&>*]:text-justify"
-          dangerouslySetInnerHTML={md(data.portfolio)}
-        />
-      </section>
+      <Section title="Career Summary" content={data.summary} />
+      <Section title="Skills" content={data.skills} />
+      <Section title="Experience" content={data.experience} />
+      <Section title="Certifications" content={data.certifications} />
+      <Section title="Portfolio" content={data.portfolio} />
     </div>
+  );
+}
+
+function Section({ title, content }) {
+  return (
+    <section className="space-y-2">
+      <h2 className="text-lg font-semibold text-gray-700 border-b border-gray-200 pb-1">
+        {title}
+      </h2>
+      <div
+        className="text-justify max-w-none text-[15px] leading-relaxed [&>ul]:list-disc [&>ul]:pl-5 [&>li]:mb-[2px]"
+        dangerouslySetInnerHTML={{ __html: marked.parse(content || "") }}
+      />
+    </section>
   );
 }

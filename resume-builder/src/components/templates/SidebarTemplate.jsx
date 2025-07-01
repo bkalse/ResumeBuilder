@@ -4,72 +4,62 @@ export default function SidebarTemplate({ data }) {
   const md = (text) => ({ __html: marked.parse(text || "") });
 
   return (
-    <div className="max-w-5xl mx-auto bg-white text-gray-900 font-sans text-sm leading-relaxed">
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 p-8">
+    <div className="min-h-screen w-full bg-white font-sans text-sm text-gray-800 leading-relaxed">
+      <div className="flex flex-col md:flex-row">
         {/* Sidebar */}
-        <aside className="md:col-span-1 space-y-6 border-r border-gray-200 pr-4">
+        <aside className="md:w-[280px] w-full bg-gray-100 px-6 py-8 space-y-6 border-r border-gray-300">
+          {/* Name & Contact */}
+          <div className="space-y-1">
+            <h1 className="text-xl font-bold text-blue-800">{data.name}</h1>
+            <p className="text-xs text-gray-600 break-words">{data.email}</p>
+            <p className="text-xs text-gray-600 break-words">{data.phone}</p>
+          </div>
+
+          {/* Skills */}
           <div>
-            <h2 className="text-md font-semibold text-blue-700 mb-1 border-l-4 border-blue-500 pl-2">
+            <h2 className="text-sm font-semibold text-gray-700 border-b mb-1">
               Skills
             </h2>
             <div
-              className="prose prose-sm text-justify"
+              className="text-sm text-justify [&>ul]:list-disc [&>ul]:pl-5 [&>li]:mb-[2px]"
               dangerouslySetInnerHTML={md(data.skills)}
             />
           </div>
+
+          {/* Certifications */}
           <div>
-            <h2 className="text-md font-semibold text-blue-700 mb-1 border-l-4 border-blue-500 pl-2">
+            <h2 className="text-sm font-semibold text-gray-700 border-b mb-1">
               Certifications
             </h2>
             <div
-              className="prose prose-sm text-justify"
+              className="text-sm text-justify [&>ul]:list-disc [&>ul]:pl-5 [&>li]:mb-[2px]"
               dangerouslySetInnerHTML={md(data.certifications)}
             />
           </div>
         </aside>
 
         {/* Main Content */}
-        <main className="md:col-span-3 space-y-6">
-          <div className="border-b pb-4">
-            <h1 className="text-3xl font-bold text-blue-800 tracking-wide">
-              {data.name}
-            </h1>
-            <p className="text-sm text-gray-600">
-              {data.email} · {data.phone}
-            </p>
-          </div>
-
-          <section>
-            <h2 className="text-md font-semibold text-gray-700 border-l-4 border-blue-500 pl-2 mb-1">
-              Career Summary
-            </h2>
-            <div
-              className="prose prose-sm text-justify"
-              dangerouslySetInnerHTML={md(data.summary)}
-            />
-          </section>
-
-          <section>
-            <h2 className="text-md font-semibold text-gray-700 border-l-4 border-blue-500 pl-2 mb-1">
-              Experience
-            </h2>
-            <div
-              className="prose prose-sm text-justify"
-              dangerouslySetInnerHTML={md(data.experience)}
-            />
-          </section>
-
-          <section>
-            <h2 className="text-md font-semibold text-gray-700 border-l-4 border-blue-500 pl-2 mb-1">
-              Portfolio
-            </h2>
-            <div
-              className="prose prose-sm text-justify"
-              dangerouslySetInnerHTML={md(data.portfolio)}
-            />
-          </section>
+        <main className="flex-1 px-8 py-10 space-y-8 bg-white">
+          <Section title="Career Summary" content={data.summary} />
+          <Section title="Experience" content={data.experience} />
+          <Section title="Portfolio" content={data.portfolio} />
         </main>
       </div>
     </div>
+  );
+}
+
+// 🔧 Shared Section Renderer
+function Section({ title, content }) {
+  return (
+    <section className="space-y-2">
+      <h2 className="text-lg font-semibold text-gray-700 border-b border-gray-200 pb-1">
+        {title}
+      </h2>
+      <div
+        className="text-justify text-[15px] leading-relaxed [&>ul]:list-disc [&>ul]:pl-5 [&>li]:mb-[2px]"
+        dangerouslySetInnerHTML={{ __html: marked.parse(content || "") }}
+      />
+    </section>
   );
 }

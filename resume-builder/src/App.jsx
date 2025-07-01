@@ -52,7 +52,7 @@ function App() {
             <p className="text-sm mb-6">🛡️ Your data stays on your device. We don’t store anything.</p>
 
             <div className="flex gap-4 mb-4">
-                {["one", "two", "three", "modern", "future", "sidebar"].map((tpl) => (
+                {["one", "two", "three", "modern", "future"].map((tpl) => (
                     <button
                         key={tpl}
                         onClick={() => setSelectedTemplate(tpl)}
@@ -63,9 +63,7 @@ function App() {
                             ? "Modern"
                             : tpl === "future"
                                 ? "Future Style"
-                                : tpl === "sidebar"
-                                    ? "Sidebar Layout"
-                                    : `Template ${tpl.toUpperCase()}`}
+                                : `Template ${tpl.toUpperCase()}`}
                     </button>
                 ))}
             </div>

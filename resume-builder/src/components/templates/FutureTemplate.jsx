@@ -1,7 +1,7 @@
 import { marked } from "marked";
 
 export default function FutureTemplate({ data }) {
-  // Convert Markdown to HTML
+  // Markdown parser
   const md = (text) => ({ __html: marked.parse(text || "") });
 
   return (
@@ -26,7 +26,7 @@ export default function FutureTemplate({ data }) {
   );
 }
 
-// 🔧 Section component used above
+// 🔧 Section Component
 function Section({ title, content }) {
   return (
     <section className="space-y-1">
@@ -34,7 +34,7 @@ function Section({ title, content }) {
         {title}
       </h2>
       <div
-        className="text-sm leading-relaxed text-justify whitespace-pre-wrap"
+        className="prose prose-sm max-w-none text-justify"
         dangerouslySetInnerHTML={{ __html: marked.parse(content || "") }}
       />
     </section>

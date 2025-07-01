@@ -3,7 +3,6 @@ import TemplateTwo from "./templates/TemplateTwo";
 import TemplateThree from "./templates/TemplateThree";
 import ModernTemplate from "./templates/ModernTemplate";
 import FutureTemplate from "./templates/FutureTemplate";
-import SidebarTemplate from "./templates/SidebarTemplate";
 
 export default function ResumePreview({ formData, selectedTemplate }) {
   const templates = {
@@ -12,7 +11,6 @@ export default function ResumePreview({ formData, selectedTemplate }) {
     three: TemplateThree,
     modern: ModernTemplate,
     future: FutureTemplate,
-
   };
 
   const Component = templates[selectedTemplate] || TemplateOne;
