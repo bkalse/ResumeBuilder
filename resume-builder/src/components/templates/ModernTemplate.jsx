@@ -21,7 +21,7 @@ export default function ModernTemplate({ data }) {
         </h2>
         <div
           className="prose prose-sm text-justify"
-          dangerouslySetInnerHTML={md(data.skills)}
+          dangerouslySetInnerHTML={md(data.summary)}
         />
       </section>
 
@@ -36,8 +36,8 @@ export default function ModernTemplate({ data }) {
       <section className="mb-6">
         <h2 className="text-lg font-semibold text-blue-700 mb-1">Experience</h2>
         <div
-          className="prose prose-sm text-justify"
-          dangerouslySetInnerHTML={md(data.skills)}
+          className="w-full max-w-none prose prose-sm text-justify [&>*]:text-justify"
+          dangerouslySetInnerHTML={md(data.experience)}
         />
       </section>
 
@@ -46,16 +46,16 @@ export default function ModernTemplate({ data }) {
           Certifications
         </h2>
         <div
-          className="prose prose-sm text-justify"
-          dangerouslySetInnerHTML={md(data.skills)}
+          className="w-full max-w-none prose prose-sm text-justify [&>*]:text-justify"
+          dangerouslySetInnerHTML={md(data.certifications)}
         />
       </section>
 
       <section>
         <h2 className="text-lg font-semibold text-blue-700 mb-1">Portfolio</h2>
         <div
-          className="prose prose-sm text-justify"
-          dangerouslySetInnerHTML={md(data.skills)}
+          className="w-full max-w-none prose prose-sm text-justify [&>*]:text-justify"
+          dangerouslySetInnerHTML={md(data.portfolio)}
         />
       </section>
     </div>
