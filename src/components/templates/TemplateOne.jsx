@@ -6,12 +6,12 @@ export default function TemplateOne({ data = {} }) {
   });
 
   return (
-    <div className="p-6">
+    <div className="p-6 text-sm text-gray-800 font-mono bg-gray-50">
       <h1 className="text-2xl font-bold">{data.name || ""}</h1>
       <p>
         {data.email} | {data.phone}
       </p>
-      <hr className="my-4" />
+      <hr className="my-4 border-gray-300 dark:border-gray-700" />
 
       <h2 className="font-semibold text-xl">Career Summary</h2>
       <div dangerouslySetInnerHTML={md(data.summary)} />

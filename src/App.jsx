@@ -93,11 +93,13 @@ function App() {
     }, [darkMode]);
 
     return (
-        <div className={`min-h-screen p-4 text-gray-800 ${darkMode ? "bg-gray-900" : "bg-gray-100"} transition-colors`}>
+        <div className={`min-h-screen p-4 transition-colors ${darkMode ? "bg-gray-900" : "bg-gray-100"}`}>
             <div className="flex items-center justify-between mb-4">
                 <div>
-                    <h1 className="text-3xl font-bold mb-1">Resume Builder</h1>
-                    <p className="text-sm mb-0">🛡️ Your data stays on your device. We don’t store anything.</p>
+                    <h1 className="text-3xl font-bold mb-1 text-gray-900 dark:text-gray-100">Resume Builder</h1>
+                    <p className="text-sm mb-0 text-gray-700 dark:text-gray-300">
+                        🛡️ Your data stays on your device. We don’t store anything.
+                    </p>
                 </div>
                 <button
                     onClick={() => setDarkMode((d) => !d)}
@@ -124,12 +126,12 @@ function App() {
                 <div>
                     {/* Template selection dropdown moved here */}
                     <div className="mb-4 px-4 w-full max-w-4xl mx-auto">
-                        <label htmlFor="template-select" className="block text-sm font-semibold mb-1">
+                        <label htmlFor="template-select" className="block text-sm font-semibold mb-1 text-gray-800 dark:text-gray-200">
                             Select Resume Template
                         </label>
                         <select
                             id="template-select"
-                            className="w-full max-w-xs p-2 border rounded bg-white dark:bg-gray-800 dark:text-gray-200"
+                            className="w-full max-w-xs p-2 border rounded bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 border-gray-300 dark:border-gray-700 transition-colors"
                             value={selectedTemplate}
                             onChange={e => setSelectedTemplate(e.target.value)}
                         >
@@ -140,31 +142,37 @@ function App() {
                             <option value="three">Template THREE</option>
                         </select>
                     </div>
-                    <Form
-                        resumeData={resumeData}
-                        setResumeData={setResumeData}
-                        selectedTemplate={selectedTemplate}
-                        setSelectedTemplate={setSelectedTemplate}
-                    />
-                    <div className="mt-4 flex gap-4">
-                        <button
-                            onClick={() => validate() && exportPDF()}
-                            className="px-4 py-2 bg-blue-600 text-white rounded"
-                        >
-                            Download PDF
-                        </button>
-                        <button
-                            onClick={() => validate() && exportDOCX()}
-                            className="px-4 py-2 bg-green-600 text-white rounded"
-                        >
-                            Download DOCX
-                        </button>
+                    <div className="w-full max-w-4xl mx-auto px-4 bg-white dark:bg-gray-800 rounded shadow transition-colors">
+                        <Form
+                            resumeData={resumeData}
+                            setResumeData={setResumeData}
+                            selectedTemplate={selectedTemplate}
+                            setSelectedTemplate={setSelectedTemplate}
+                        />
+                        <div className="mt-4 flex gap-4">
+                            <button
+                                onClick={() => validate() && exportPDF()}
+                                className="px-4 py-2 bg-blue-600 text-white rounded"
+                            >
+                                Download PDF
+                            </button>
+                            <button
+                                onClick={() => validate() && exportDOCX()}
+                                className="px-4 py-2 bg-green-600 text-white rounded"
+                            >
+                                Download DOCX
+                            </button>
+                        </div>
                     </div>
                 </div>
-                <ResumePreview
-                    resumeData={resumeData}
-                    selectedTemplate={selectedTemplate}
-                />
+                <div className="w-full flex justify-center items-start">
+                    <div className="bg-white dark:bg-gray-800 shadow-md p-8 rounded w-[794px] min-h-[1123px] text-justify text-[12pt] leading-relaxed print:shadow-none print:border-none print:p-8 print:w-full print:min-h-full transition-colors text-gray-900 dark:text-gray-100" id="resume-preview">
+                        <ResumePreview
+                            resumeData={resumeData}
+                            selectedTemplate={selectedTemplate}
+                        />
+                    </div>
+                </div>
             </div>
         </div>
     );
