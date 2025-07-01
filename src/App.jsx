@@ -8,16 +8,23 @@ import htmlDocx from "html-docx-js/dist/html-docx";
 function App() {
     const [resumeData, setResumeData] = useState(() => {
         const stored = localStorage.getItem("resumeData");
-        return stored ? JSON.parse(stored) : {
-            name: "",
-            email: "",
-            phone: "",
-            summary: "",
-            skills: "",
-            experience: "",
-            certifications: "",
-            portfolio: ""
-        };
+        return stored
+            ? JSON.parse(stored)
+            : {
+                name: "Jane Doe",
+                email: "jane.doe@email.com",
+                phone: "+1 555-123-4567",
+                summary:
+                    "Experienced **Full Stack Developer** with a passion for building scalable web applications and working across the stack. Adept at collaborating in agile teams and delivering high-quality solutions.\n\n- 5+ years in software engineering\n- Strong communicator & mentor",
+                skills:
+                    "- JavaScript (React, Node.js)\n- Python (Django, FastAPI)\n- SQL & NoSQL Databases\n- REST & GraphQL APIs\n- CI/CD & Cloud (AWS, Azure)\n- Unit Testing & TDD",
+                experience:
+                    "- **Senior Developer**, Acme Corp (2021–Present)\n  - Led migration to React and improved performance by 30%\n  - Mentored 4 junior devs\n- **Web Developer**, BetaSoft (2018–2021)\n  - Built internal tools with Django\n  - Automated deployment pipelines",
+                certifications:
+                    "- AWS Certified Solutions Architect\n- Microsoft Certified: Azure Developer Associate",
+                portfolio:
+                    "- [GitHub](https://github.com/janedoe)\n- [Portfolio Website](https://janedoe.dev)"
+            };
     });
 
 
