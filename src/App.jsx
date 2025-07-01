@@ -51,7 +51,14 @@ function App() {
 
     const exportPDF = () => {
         const element = document.getElementById("resume-preview");
-        html2pdf().from(element).save(`${resumeData.name}_resume.pdf`);
+        const opt = {
+            margin: [0.5, 0.5, 0.5, 0.5], // inches: top, left, bottom, right
+            filename: `${resumeData.name}_resume.pdf`,
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2, useCORS: true, backgroundColor: null },
+            jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+        };
+        html2pdf().set(opt).from(element).save();
     };
 
     const exportDOCX = () => {
