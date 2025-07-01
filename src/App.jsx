@@ -31,10 +31,10 @@ function App() {
 
     const validate = () => {
         const newErrors = {};
-        if (!formData.name.trim()) newErrors.name = "Name is required";
-        if (!validateEmail(formData.email))
+        if (!resumeData.name.trim()) newErrors.name = "Name is required";
+        if (!validateEmail(resumeData.email))
             newErrors.email = "Invalid email address";
-        if (!validatePhone(formData.phone))
+        if (!validatePhone(resumeData.phone))
             newErrors.phone = "Invalid phone number";
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
@@ -42,7 +42,7 @@ function App() {
 
     const exportPDF = () => {
         const element = document.getElementById("resume-preview");
-        html2pdf().from(element).save(`${formData.name}_resume.pdf`);
+        html2pdf().from(element).save(`${resumeData.name}_resume.pdf`);
     };
 
     const exportDOCX = () => {
@@ -51,7 +51,7 @@ function App() {
         const blob = htmlDocx.asBlob(html);
         const link = document.createElement("a");
         link.href = URL.createObjectURL(blob);
-        link.download = `${formData.name}_resume.docx`;
+        link.download = `${resumeData.name}_resume.docx`;
         link.click();
     };
 
