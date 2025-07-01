@@ -1,4 +1,28 @@
-# React + Vite
+# Resume Builder
+
+A modern, privacy-friendly resume builder built with React and Vite.
+
+- **No user data is ever sent to a server.** All information is stored locally in your browser using local storage.
+- **Create, preview, and export** your resume in multiple templates.
+- **Download as PDF or DOCX** with one click.
+- **Dark mode** support for comfortable editing.
+- **Live preview** as you edit your information.
+
+Try it live: [https://js-cv-builder.netlify.app/](https://js-cv-builder.netlify.app/)
+
+---
+
+## Tech Stack
+
+- React
+- Vite
+- Tailwind CSS
+- Local Storage for persistence
+- No backend, no user tracking
+
+---
+
+## Development
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
