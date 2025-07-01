@@ -1,11 +1,11 @@
 import { marked } from "marked";
 
-export default function TemplateTwo({ data }) {
+export default function TemplateTwo({ data = {} }) {
   const md = (text) => ({ __html: marked.parse(text || "") });
 
   return (
     <div className="p-6 font-serif text-gray-900">
-      <h1 className="text-3xl font-bold border-b">{data.name}</h1>
+      <h1 className="text-3xl font-bold border-b">{data.name || ""}</h1>
       <p className="italic">
         {data.email} | {data.phone}
       </p>

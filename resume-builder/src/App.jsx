@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Form from "./components/Form";
 import ResumePreview from "./components/ResumePreview";
 import { validateEmail, validatePhone } from "./utils/validators";
@@ -6,19 +6,28 @@ import html2pdf from "html2pdf.js";
 import htmlDocx from "html-docx-js/dist/html-docx";
 
 function App() {
-    const [formData, setFormData] = useState({
-        name: "",
-        email: "",
-        phone: "",
-        summary: "",
-        skills: "",
-        experience: "",
-        certifications: "",
-        portfolio: "",
+    const [resumeData, setResumeData] = useState(() => {
+        const stored = localStorage.getItem("resumeData");
+        return stored ? JSON.parse(stored) : {
+            name: "",
+            email: "",
+            phone: "",
+            summary: "",
+            skills: "",
+            experience: "",
+            certifications: "",
+            portfolio: ""
+        };
     });
 
+
     const [errors, setErrors] = useState({});
-    const [selectedTemplate, setSelectedTemplate] = useState("one");
+    const [selectedTemplate, setSelectedTemplate] = useState(() => {
+        const stored = localStorage.getItem("selectedTemplate");
+        return stored || "modern";
+    });
+
+
 
     const validate = () => {
         const newErrors = {};
@@ -46,6 +55,25 @@ function App() {
         link.click();
     };
 
+    useEffect(() => {
+        const stored = localStorage.getItem("resumeData");
+        if (stored) {
+            setResumeData(JSON.parse(stored));
+        }
+        const storedTemplate = localStorage.getItem("selectedTemplate");
+        if (storedTemplate) {
+            setSelectedTemplate(storedTemplate);
+        }
+    }, []);
+
+    useEffect(() => {
+        localStorage.setItem("resumeData", JSON.stringify(resumeData));
+    }, [resumeData]);
+
+    useEffect(() => {
+        localStorage.setItem("selectedTemplate", selectedTemplate);
+    }, [selectedTemplate]);
+
     return (
         <div className="min-h-screen p-4 bg-gray-100 text-gray-800">
             <h1 className="text-3xl font-bold mb-4">Resume Builder</h1>
@@ -69,8 +97,16 @@ function App() {
             </div>
 
             <div className="grid md:grid-cols-2 gap-6">
-                <Form formData={formData} setFormData={setFormData} errors={errors} />
-                <ResumePreview formData={formData} selectedTemplate={selectedTemplate} />
+                <Form
+                    resumeData={resumeData}
+                    setResumeData={setResumeData}
+                    selectedTemplate={selectedTemplate}
+                    setSelectedTemplate={setSelectedTemplate}
+                />
+                <ResumePreview
+                    resumeData={resumeData}
+                    selectedTemplate={selectedTemplate}
+                />
             </div>
 
             <div className="mt-4 flex gap-4">

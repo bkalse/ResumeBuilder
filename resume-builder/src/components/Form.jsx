@@ -1,69 +1,75 @@
 import React from "react";
 
-export default function Form({ formData, setFormData, errors }) {
-  const handleChange = (e) => {
-    setFormData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
+export default function Form({ resumeData = {}, setResumeData, selectedTemplate, setSelectedTemplate }) {
+  const handleChange = (field) => (e) => {
+    setResumeData((prev) => ({ ...prev, [field]: e.target.value }));
   };
-
-  const fieldHelp = {
-    summary: "Add a short summary of your career. Markdown works here!",
-    skills: "List your skills using `-` or commas.",
-    experience: "Describe your past roles. Use `**Role**, Company` format if you like.",
-  };
-
-  const fields = [
-    { name: "name", label: "Full Name" },
-    { name: "email", label: "Email" },
-    { name: "phone", label: "Phone" },
-    { name: "summary", label: "Career Summary", multiline: true },
-    { name: "skills", label: "Skills", multiline: true },
-    { name: "experience", label: "Experience", multiline: true },
-    { name: "certifications", label: "Certifications", multiline: true },
-    { name: "portfolio", label: "Portfolio Links", multiline: true },
-  ];
 
   return (
-    <div className="space-y-4">
-      {fields.map((f) => (
-        <div key={f.name} className="mb-4">
-          <label className="block font-medium mb-1">{f.label}</label>
-          {f.multiline ? (
-            <textarea
-              name={f.name}
-              value={formData[f.name]}
-              onChange={handleChange}
-              rows={4}
-              className="w-full border p-2 rounded"
-              placeholder="Write here..."
-            />
-          ) : (
-            <input
-              type="text"
-              name={f.name}
-              value={formData[f.name]}
-              onChange={handleChange}
-              className="w-full border p-2 rounded"
-            />
-          )}
-
-          {fieldHelp[f.name] && (
-            <p className="text-xs text-gray-500 mt-1">{fieldHelp[f.name]}</p>
-          )}
-
-          {f.multiline && (
-            <p className="text-xs text-gray-500 mt-1">
-              ✏️ You can use <strong>Markdown</strong> for formatting (e.g. `**bold**`, `- list item`). Plain text works too.
-            </p>
-          )}
-          {errors[f.name] && (
-            <p className="text-red-600 text-sm mt-1">{errors[f.name]}</p>
-          )}
-        </div>
-      ))}
-
+    <div className="w-full max-w-4xl mx-auto px-4 py-6 space-y-4">
+      <input
+        type="text"
+        placeholder="Full Name"
+        className="w-full p-2 border rounded"
+        value={resumeData.name || ""}
+        onChange={handleChange("name")}
+      />
+      <input
+        type="email"
+        placeholder="Email"
+        className="w-full p-2 border rounded"
+        value={resumeData.email || ""}
+        onChange={handleChange("email")}
+      />
+      <input
+        type="tel"
+        placeholder="Phone"
+        className="w-full p-2 border rounded"
+        value={resumeData.phone || ""}
+        onChange={handleChange("phone")}
+      />
+      <textarea
+        placeholder="Career Summary (Markdown supported)"
+        className="w-full p-2 border rounded h-24"
+        value={resumeData.summary || ""}
+        onChange={handleChange("summary")}
+      />
+      <textarea
+        placeholder="Skills (use bullet list with '-')"
+        className="w-full p-2 border rounded h-24"
+        value={resumeData.skills || ""}
+        onChange={handleChange("skills")}
+      />
+      <textarea
+        placeholder="Experience (use bullet list or Markdown)"
+        className="w-full p-2 border rounded h-32"
+        value={resumeData.experience || ""}
+        onChange={handleChange("experience")}
+      />
+      <textarea
+        placeholder="Certifications (Markdown supported)"
+        className="w-full p-2 border rounded h-24"
+        value={resumeData.certifications || ""}
+        onChange={handleChange("certifications")}
+      />
+      <textarea
+        placeholder="Portfolio (links or Markdown)"
+        className="w-full p-2 border rounded h-20"
+        value={resumeData.portfolio || ""}
+        onChange={handleChange("portfolio")}
+      />
+      <div className="pt-4">
+        <label className="block text-sm mb-1">Select Template</label>
+        <select
+          className="w-full p-2 border rounded"
+          value={selectedTemplate}
+          onChange={(e) => setSelectedTemplate(e.target.value)}
+        >
+          <option value="modern">Modern</option>
+          <option value="template1">Template One</option>
+          <option value="future">Future</option>
+        </select>
+      </div>
     </div>
   );
 }

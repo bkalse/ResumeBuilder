@@ -1,11 +1,11 @@
 import { marked } from "marked";
 
-export default function TemplateThree({ data }) {
+export default function TemplateThree({ data = {} }) {
   const md = (text) => ({ __html: marked.parse(text || "") });
 
   return (
     <div className="p-6 text-sm text-gray-800 font-mono bg-gray-50">
-      <h1 className="text-xl font-bold">{data.name}</h1>
+      <h1 className="text-xl font-bold">{data.name || ""}</h1>
       <div className="text-xs">
         {data.email} | {data.phone}
       </div>

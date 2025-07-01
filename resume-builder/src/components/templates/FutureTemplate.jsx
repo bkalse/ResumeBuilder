@@ -1,6 +1,6 @@
 import { marked } from "marked";
 
-export default function FutureTemplate({ data }) {
+export default function FutureTemplate({ data = {} }) {
   // Markdown parser
   const md = (text) => ({ __html: marked.parse(text || "") });
 
@@ -9,7 +9,7 @@ export default function FutureTemplate({ data }) {
       {/* Header */}
       <div className="space-y-1 border-b border-gray-300 pb-4">
         <h1 className="text-4xl font-bold text-blue-800 tracking-wide">
-          {data.name}
+          {data.name || ""}
         </h1>
         <p className="text-sm text-gray-600">
           {data.email} · {data.phone}

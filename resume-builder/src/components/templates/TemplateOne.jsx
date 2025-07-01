@@ -1,13 +1,13 @@
 import { marked } from "marked";
 
-export default function TemplateOne({ data }) {
+export default function TemplateOne({ data = {} }) {
   const md = (text) => ({
     __html: marked.parse(text || ""),
   });
 
   return (
     <div className="p-6">
-      <h1 className="text-2xl font-bold">{data.name}</h1>
+      <h1 className="text-2xl font-bold">{data.name || ""}</h1>
       <p>
         {data.email} | {data.phone}
       </p>

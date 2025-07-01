@@ -1,13 +1,13 @@
 import { marked } from "marked";
 
-export default function ModernTemplate({ data }) {
+export default function ModernTemplate({ data = {} }) {
   const md = (text) => ({ __html: marked.parse(text || "") });
 
   return (
     <div className="w-full px-10 py-10 bg-white text-gray-900 font-sans text-[15px] leading-relaxed space-y-10">
       {/* Header */}
       <header className="space-y-1 border-b pb-4 border-gray-300">
-        <h1 className="text-3xl font-bold text-gray-800">{data.name}</h1>
+        <h1 className="text-3xl font-bold text-gray-800">{data.name || ""}</h1>
         <p className="text-sm text-gray-500">
           {data.email} · {data.phone}
         </p>
