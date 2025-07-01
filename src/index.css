@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Dark mode overrides */
+:root {
+  color-scheme: light dark;
+}
+.dark {
+  /* fallback for background and text */
+  background-color: #18181b;
+  color: #e5e7eb;
+}
